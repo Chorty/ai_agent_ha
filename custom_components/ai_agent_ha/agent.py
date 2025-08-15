@@ -11,7 +11,7 @@ ai_agent_ha:
   local_url: "http://localhost:11434/api/generate"  # Required for local models
   # Model configuration (optional, defaults will be used if not specified)
   models:
-    openai: "gpt-3.5-turbo"  # or "gpt-4", "gpt-4-turbo", etc.
+    openai: "gpt-5-mini"  # or "gpt-5", "gpt-4o", etc.
     llama: "Llama-4-Maverick-17B-128E-Instruct-FP8"
     gemini: "gemini-1.5-flash"  # or "gemini-1.5-pro", "gemini-1.0-pro", etc.
     openrouter: "openai/gpt-4o"  # or any model available on OpenRouter
@@ -420,10 +420,15 @@ class OpenAIClient(BaseAIClient):
         # Models that require max_completion_tokens instead of max_tokens
         completion_token_models = ["o3-mini", "o3", "o1-mini", "o1-preview", "o1"]
 
+        # Models that use max_output_tokens
+        output_token_models = ["gpt-4o", "gpt-4.1", "gpt-5"]
+
         # Check if the model name contains any of the newer model identifiers
         model_lower = self.model.lower()
         if any(model_id in model_lower for model_id in completion_token_models):
             return "max_completion_tokens"
+        if any(model_id in model_lower for model_id in output_token_models):
+            return "max_output_tokens"
         return "max_tokens"
 
     def _is_restricted_model(self):
