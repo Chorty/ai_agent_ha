@@ -62,6 +62,8 @@ AVAILABLE_MODELS = {
         "gpt-4-turbo",
         "gpt-4o",
         "gpt-4o-mini",
+        "gpt-5",
+        "gpt-5-mini",
         "o1-preview",
         "o1-mini",
     ],
@@ -72,6 +74,8 @@ AVAILABLE_MODELS = {
         "gemini-2.0-flash-exp",
     ],
     "openrouter": [
+        "openai/gpt-5",
+        "openai/gpt-5-mini",
         "openai/gpt-4o",
         "openai/gpt-4-turbo",
         "openai/gpt-3.5-turbo",

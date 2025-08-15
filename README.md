@@ -201,7 +201,7 @@ data:
 
 ### Custom Models
 Enter any model name in the "Custom Model" field:
-- OpenAI: `gpt-4-0125-preview`
+ - OpenAI: `gpt-5-mini`
 - Anthropic: `claude-3-opus-20240229`
 - OpenRouter: `anthropic/claude-3-opus`
 - Gemini: `gemini-pro-vision`

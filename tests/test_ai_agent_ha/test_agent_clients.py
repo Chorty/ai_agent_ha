@@ -77,10 +77,14 @@ class TestOpenAIClient:
             # Test newer models
             client_o3 = OpenAIClient("test-token", "o3-mini")
             assert client_o3._get_token_parameter() == "max_completion_tokens"
-            
+
             # Test older models
             client_gpt = OpenAIClient("test-token", "gpt-3.5-turbo")
             assert client_gpt._get_token_parameter() == "max_tokens"
+
+            # Test gpt-5 models
+            client_gpt5 = OpenAIClient("test-token", "gpt-5-mini")
+            assert client_gpt5._get_token_parameter() == "max_output_tokens"
             
         except ImportError:
             pytest.skip("OpenAIClient not available")
