@@ -418,7 +418,19 @@ class OpenAIClient(BaseAIClient):
     def _get_token_parameter(self):
         """Determine which token parameter to use based on the model."""
         # Models that require max_completion_tokens instead of max_tokens
-        completion_token_models = ["o3-mini", "o3", "o1-mini", "o1-preview", "o1"]
+        # This includes newer GPT and reasoning model families that have
+        # adopted the ``max_completion_tokens`` parameter in the Chat
+        # Completions API.
+        completion_token_models = [
+            "o3-mini",
+            "o3",
+            "o1-mini",
+            "o1-preview",
+            "o1",
+            "gpt-4o",
+            "gpt-4.1",
+            "gpt-5",
+        ]
 
         # Models that use max_output_tokens
         output_token_models = ["gpt-4o", "gpt-4.1", "gpt-5"]
