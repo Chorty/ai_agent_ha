@@ -432,10 +432,15 @@ class OpenAIClient(BaseAIClient):
             "gpt-5",
         ]
 
+        # Models that use max_output_tokens
+        output_token_models = ["gpt-4o", "gpt-4.1", "gpt-5"]
+
         # Check if the model name contains any of the newer model identifiers
         model_lower = self.model.lower()
         if any(model_id in model_lower for model_id in completion_token_models):
             return "max_completion_tokens"
+        if any(model_id in model_lower for model_id in output_token_models):
+            return "max_output_tokens"
         return "max_tokens"
 
     def _is_restricted_model(self):
