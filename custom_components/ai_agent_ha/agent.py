@@ -11,7 +11,7 @@ ai_agent_ha:
   local_url: "http://localhost:11434/api/generate"  # Required for local models
   # Model configuration (optional, defaults will be used if not specified)
   models:
-    openai: "gpt-3.5-turbo"  # or "gpt-4", "gpt-4-turbo", etc.
+    openai: "gpt-5-mini"  # or "gpt-5", "gpt-4o", etc.
     llama: "Llama-4-Maverick-17B-128E-Instruct-FP8"
     gemini: "gemini-1.5-flash"  # or "gemini-1.5-pro", "gemini-1.0-pro", etc.
     openrouter: "openai/gpt-4o"  # or any model available on OpenRouter
@@ -418,7 +418,19 @@ class OpenAIClient(BaseAIClient):
     def _get_token_parameter(self):
         """Determine which token parameter to use based on the model."""
         # Models that require max_completion_tokens instead of max_tokens
-        completion_token_models = ["o3-mini", "o3", "o1-mini", "o1-preview", "o1"]
+        # This includes newer GPT and reasoning model families that have
+        # adopted the ``max_completion_tokens`` parameter in the Chat
+        # Completions API.
+        completion_token_models = [
+            "o3-mini",
+            "o3",
+            "o1-mini",
+            "o1-preview",
+            "o1",
+            "gpt-4o",
+            "gpt-4.1",
+            "gpt-5",
+        ]
 
         # Check if the model name contains any of the newer model identifiers
         model_lower = self.model.lower()
